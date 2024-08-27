@@ -1,24 +1,18 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+const divide = (a,b) => {
+  if (b == 0){
+    throw new Error('Division entre cero no es posible')
+  }
+  return a/b
+}
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
-
-setupCounter(document.querySelector('#counter'))
+try {
+  //AQUI CORRE TODO LO BUENO
+  console.log('Resultado', divide(10,0))
+} catch (error) {
+  //AQUI CAEN LOS ERRORES
+  console.log(error)
+  console.log('OCURRIO UN ERROR EN DIVIDIENDO')
+}finally{
+  //PASE LO QUE PASE SIEMPRE SE EJECUTA
+  console.log('PASE LO QUE PASE ESTO CORRE')
+}
