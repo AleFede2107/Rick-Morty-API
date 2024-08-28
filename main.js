@@ -1,27 +1,33 @@
+import './style.css'
+document.getElementById('app').innerHTML = `<h1 class="title">Rick & Morty App</h1>
+<section id="character-container" class="container"></section>`
 //Rick & Morty API
 const endpoint = 'https://rickandmortyapi.com/api/character';
-const app = document.getElementById("app");
 
-fetch(endpoint)
-  .then(response => response.json())
-  .then(data => {
-    const characters = data.results;
+//ASYNC - AWAIT
+const getCharacters = async() => {
+  try {
+    const response = await fetch(endpoint)
+    const data = await response.json()
+    const characters = data.results
+    const container = document.getElementById('character-container')
 
     characters.map(character => {
-      const characterElement = document.createElement('div')
-      
-      characterElement.innerHTML = `
-        <h2>${character.name}</h2>
-        <h4>${character.status}</h4>
-        <h4>${character.species}</h4>
-        <h4>${character.gender}</h4>
-        <h2>${character.origin.name}</h2>
-        <img src="${character.image}" alt="${character.name}">
+      container.innerHTML += `
+        <div class="card">
+          <h2 class="card-title">${character.name}</h2>
+          <img src="${character.image}" alt="${character.name}" class="card-image">
+          <p class="card-species"><span>Species: </span>${character.species}</p>
+          <p class="card-status"><span>Status: </span>${character.status}</p>
+          <p class="card-origin"><span>Origin: </span>${character.origin.name}</p>
+        </div>
       `
-      
-      app.appendChild(characterElement);
-    }) 
-  })
-  .catch((error) => {
+    })
+
+  } catch (error) {
     console.log(error)
-  })
+  }
+  
+}
+
+getCharacters()
