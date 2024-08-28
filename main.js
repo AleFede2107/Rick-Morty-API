@@ -1,18 +1,37 @@
-const divide = (a,b) => {
-  if (b == 0){
-    throw new Error('Division entre cero no es posible')
-  }
-  return a/b
-}
+/* Promise()
+//Variables de estados
+pending INICIAL
+fulfilled Operacion exitosa
+rejected Operacion fallida */
 
-try {
-  //AQUI CORRE TODO LO BUENO
-  console.log('Resultado', divide(10,0))
-} catch (error) {
-  //AQUI CAEN LOS ERRORES
+//Tipos de callbacks
+/* resolve Operacion exitosa
+reject Operacion Fallida
+finally Se ejecuta pase lo que pase */
+
+// Metodos de una promesa
+/* .then cuando la Operacion es exitosa
+.catch() Operacion Fallida */
+
+const myPromise = new Promise((resolve, reject) => {
+
+  setTimeout(() => {
+    let operationSucces = false;
+    if(operationSucces){
+      resolve('Operacion exitosa')
+    } else {
+      reject('Operacion Fallida')
+    }
+
+
+  }, 3000);  
+
+})
+
+console.log(myPromise);
+
+myPromise.then((message) => {
+  console.log(message)
+}).catch((error) => {
   console.log(error)
-  console.log('OCURRIO UN ERROR EN DIVIDIENDO')
-}finally{
-  //PASE LO QUE PASE SIEMPRE SE EJECUTA
-  console.log('PASE LO QUE PASE ESTO CORRE')
-}
+})
